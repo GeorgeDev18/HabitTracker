@@ -44,8 +44,8 @@ public class User implements UserDetails{
     Long id;
     @Column(nullable = false)
     String username;
-    String firstName;
-    String lastName;
+    String firstname;
+    String lastname;
     String password;
     @Enumerated(EnumType.STRING)
     Role role;

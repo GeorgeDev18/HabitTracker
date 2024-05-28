@@ -1,1 +1,25 @@
+.contenedor{
+    display: flex;
+    float: right;
+    margin-right: 20%;
+}
 
+#inicio {
+    display: grid;
+    min-height: 300px;
+    grid-template-columns: 700px 359px;
+    gap: 434px;
+}
+
+.titulo{
+    display: inline-block;
+    margin-left: 20%;
+}
+
+.titulo h1 {
+    font-size: 100px;
+}
+
+.titulo p{
+    font-size: 30px;
+}
