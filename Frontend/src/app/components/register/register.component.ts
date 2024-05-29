@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Register } from '../../interfaces/register';
 import { NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class RegisterComponent {
   successMessage: string = '';
   
 
-  constructor(private http : HttpClient){}
+  constructor(private http : HttpClient, private router: Router){}
 
   newRegister(form: NgForm) {
     if (this.register.password !== this.confirmPassword) {
@@ -50,6 +51,7 @@ export class RegisterComponent {
           this.successMessage = 'Registro exitoso';
           this.errorMessage = '';
           form.resetForm();
+          this.router.navigate(['/list-habits']);
         },
         (error) => {
           this.errorMessage = 'Error en el registro';

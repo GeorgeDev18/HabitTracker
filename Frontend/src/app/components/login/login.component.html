@@ -26,10 +26,11 @@
                             <input type="password" class="form-control mt-2" id="password" [(ngModel)]="login.password" name="password" placeholder="Ingresa contraseña" required>
                         </div>
                      <div class="d-grid gap-2">
-                        <button type="submit" value="Submit" class="btn btn-primary mt-2" routerLink="/list-habits" >Ingresar</button>                
+                        <button type="submit" value="Submit" class="btn btn-primary mt-2"  >Ingresar</button>                
                      </div>
                       <p class="mt-2">¿No tienes cuenta? <a href="#" routerLink="/register" >Registrate</a></p>
                    </form>
+                   <div *ngIf="errorMessage">{{ errorMessage }}</div>
         
                   </div>
               

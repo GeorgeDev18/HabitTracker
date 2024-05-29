@@ -16,23 +16,26 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   login: Login = new Login();
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  loginUser() {
-    this.authService.login(this.login.username, this.login.password).subscribe(
-      response => {
-        if (response === 'Login successful') {
-          this.router.navigate(['/api/v1/list-habits']);
-        } else {
-          alert('Invalid username or password');
-        }
+  loginUser(): void {
+    this.authService.login(this.login.username, this.login.password).subscribe({
+      next: (response) => {
+        // Aquí se maneja la respuesta exitosa
+        console.log('Login successful', response);
+        // Supongamos que el token está en response.token
+        localStorage.setItem('authToken', response.token);
+        // Navegar a otra ruta
+        this.router.navigate(['/list-habits']);
       },
-      error => {
-        console.error(error);
-        alert('An error occurred');
+      error: (error) => {
+        // Aquí se maneja un error
+        console.error('Login failed', error);
+        this.errorMessage = 'Login failed. Please check your credentials and try again.';
       }
-    );
+    });
   }
 }
 
