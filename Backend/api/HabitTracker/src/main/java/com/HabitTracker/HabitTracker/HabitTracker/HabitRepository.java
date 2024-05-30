@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface HabitRepository extends JpaRepository<Habit,Long> {
    
     List<Habit> findHabitByUserId(Long userId);
-
+    List<Habit> findHabitByUserIdAndNameDay(Long id, String nameDay);
     Habit findByIdAndUserId(Long habitId, Long userId);
+
 }

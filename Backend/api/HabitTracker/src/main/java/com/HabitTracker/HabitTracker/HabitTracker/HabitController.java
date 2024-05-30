@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
+
+
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -34,6 +36,13 @@ public class HabitController {
     {
          return habitService.getHabitsByUserId();
     }
+
+    @GetMapping("habit/{nameDay}")
+    public List<Habit> getHabitByNameDay(@PathVariable String nameDay) 
+    {
+        return habitService.getHabitByNameDay(nameDay);
+    }
+    
 
     @PostMapping("new-habit")
     public ResponseEntity<Long> saveHabit( @RequestBody Habit habit) 

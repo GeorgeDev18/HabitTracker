@@ -40,6 +40,17 @@ public class HabitService {
         return habitRepository.findHabitByUserId(userId);
     }
 
+    public List<Habit> getHabitByNameDay(String nameDay) {
+
+        // Obtenemos el ID del usuario autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+
+        //Look for user's habits by its nameDay
+        return habitRepository.findHabitByUserIdAndNameDay(userId, nameDay);
+    }
+
     //POST
     public Long saveHabit(Habit habit) {
         
@@ -67,7 +78,7 @@ public class HabitService {
                 .description(habit.getDescription())
                 .level_priority(habit.getLevel_priority())
                 .type(habit.getType())
-                .date(habit.getDate())
+                .nameDay(habit.getNameDay())
                 .build();
         
         //Establecemos el id que relaciona al usuario con su hábito
@@ -110,7 +121,7 @@ public class HabitService {
                 .description(newHabit.getDescription())
                 .type(newHabit.getType())
                 .level_priority(newHabit.getLevel_priority())
-                .date(newHabit.getDate())
+                .nameDay(newHabit.getNameDay())
                 .state(newHabit.isState())
                 .build();
 
@@ -137,5 +148,7 @@ public class HabitService {
         //Finalmente eliminamos el hábito de la DB
         habitRepository.delete(habit);
     }
+
+   
     
 }

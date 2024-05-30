@@ -1,6 +1,6 @@
 package com.HabitTracker.HabitTracker.HabitTracker;
 
-import java.util.Date;
+
 
 
 import com.HabitTracker.HabitTracker.User.User;
@@ -39,7 +39,7 @@ public class Habit {
     boolean state;
     String level_priority;
     String type;
-    Date date;
+    String nameDay;
    
     //Relación entre tabla 'habit' y tabla 'user_data'
     @ManyToOne

@@ -20,7 +20,7 @@ public class HabitValidator {
         validateField(habit.getDescription(), DESCRIPTION_ERROR);
         validateField(habit.getType(), TYPE_ERROR);
         validateField(habit.getLevel_priority(), LEVEL_PRIORITY);
-        validateField(habit.getDate(), DATE_ERROR);
+        validateField(habit.getNameDay(), DATE_ERROR);
     }
 
     private static void validateField(Object field, String errorMessage) {
