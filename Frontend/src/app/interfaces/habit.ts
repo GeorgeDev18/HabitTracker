@@ -2,8 +2,7 @@ export interface habit{
     id?: number;
     name: string;
     description: string;
-    category: string;
-    priority:string;
-    daysPerWeek:number
-
+    type: string;
+    level_priority :string;
+    nameDay: string;
 }

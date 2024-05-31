@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ListHabitsComponent } from './list-habits.component';
 
 describe('ListHabitsComponent', () => {

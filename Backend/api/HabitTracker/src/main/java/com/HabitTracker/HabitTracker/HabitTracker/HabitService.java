@@ -43,6 +43,7 @@ public class HabitService {
     public List<Habit> getHabitByNameDay(String nameDay) {
 
         // Obtenemos el ID del usuario autenticado
+        // Get authenticated  user's ID
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User userDetails = (User) authentication.getPrincipal();
         Long userId = userDetails.getId();

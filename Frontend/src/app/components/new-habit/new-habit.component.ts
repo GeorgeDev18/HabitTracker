@@ -20,9 +20,9 @@ export class NewHabitComponent implements OnInit{
         {
           name: ['', Validators.required],
           description: ['', Validators.required],
-          category: ['', Validators.required],
-          priority: ['', Validators.required],
-          daysPerWeek: [null, [Validators.required, Validators.min(1), Validators.max(7)]]
+          type: ['', Validators.required],
+          level_priority: ['', Validators.required],
+          nameDay: [null, [Validators.required, Validators.min(1), Validators.max(7)]]
         }
       )
 
@@ -38,9 +38,9 @@ export class NewHabitComponent implements OnInit{
       
       name: this.formNewHabit.value.name,
       description: this.formNewHabit.value.description,
-      category: this.formNewHabit.value.category,
-      priority: this.formNewHabit.value.priority,
-      daysPerWeek: this.formNewHabit.value.daysPerWeek
+      type: this.formNewHabit.value.type,
+      level_priority: this.formNewHabit.value.level_priority,
+      nameDay: this.formNewHabit.value.nameDay
     }
 
 
