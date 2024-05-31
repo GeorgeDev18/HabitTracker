@@ -1,55 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { habit } from '../../interfaces/habit';
+import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HabitService } from '../../services/habit.service';
+import { Habit } from '../../interfaces/habit';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-habit',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule,CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './new-habit.component.html',
-  styleUrl: './new-habit.component.css'
+  styleUrls: ['./new-habit.component.css']
 })
-export class NewHabitComponent implements OnInit{
- formNewHabit: FormGroup;
+export class NewHabitComponent implements OnInit {
+  habits: Habit[] = [];
+  habitForm: FormGroup;
+  errorMessage: string = '';
 
- constructor(private formBuilder: FormBuilder) {
-      this.formNewHabit = this.formBuilder.group(
-        {
-          name: ['', Validators.required],
-          description: ['', Validators.required],
-          type: ['', Validators.required],
-          level_priority: ['', Validators.required],
-          nameDay: [null, [Validators.required, Validators.min(1), Validators.max(7)]]
-        }
-      )
-
-
-
- }
- 
-
-
-
-  addHabit(){
-    const newHabit : habit = {
-      
-      name: this.formNewHabit.value.name,
-      description: this.formNewHabit.value.description,
-      type: this.formNewHabit.value.type,
-      level_priority: this.formNewHabit.value.level_priority,
-      nameDay: this.formNewHabit.value.nameDay
-    }
-
-
-    console.log(newHabit);  
-
+  constructor(private fb: FormBuilder, private habitService: HabitService) {
+    this.habitForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      type: ['', Validators.required],
+      level_priority: ['', Validators.required],
+      nameDay: ['', Validators.required]
+    });
   }
 
-
   ngOnInit(): void {
-   
+    // Any initialization logic if needed
+  }
+
+  addHabit(): void {
+    if (this.habitForm.valid) {
+      const newHabit: Habit = this.habitForm.value;
+      this.habitService.postHabits(newHabit).subscribe(
+        (habit: Habit) => {
+          this.habits.push(habit);
+          this.habitForm.reset(); // Resetea el formulario
+        },
+        (error) => {
+          this.errorMessage = error.message || 'An error occurred while adding a new habit';
+        }
+      );
+    } else {
+      this.errorMessage = 'Please fill in all required fields';
+    }
   }
 }

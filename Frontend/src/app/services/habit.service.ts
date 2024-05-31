@@ -1,23 +1,51 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { habit } from '../interfaces/habit';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Habit } from '../interfaces/habit';
 import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HabitService {
-
-  private habitsUrl = 'http://localhost:8080/api/v1/list-habits';
+  
+  private readonly BASE_URL = 'http://localhost:8080/api/v1';
+  private readonly HABITS_URL_GET = `${this.BASE_URL}/list-habits`;
+  private readonly HABITS_URL_POST = `${this.BASE_URL}/new-habit`;
+  
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getHabits(): Observable<habit[]> {
-    const token = this.authService.getToken();
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken() || localStorage.getItem('authToken');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
-    return this.http.get<habit[]>(this.habitsUrl, { headers });
   }
+
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('An error occurred:', error);
+    // Customize this to provide more detailed error information if necessary
+    return throwError('Something went wrong; please try again later.');
+  }
+
+  getHabits(): Observable<Habit[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Habit[]>(this.HABITS_URL_GET, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  postHabits(habit: Habit): Observable<Habit> {
+    const headers = this.getHeaders();
+    return this.http.post<Habit>(this.HABITS_URL_POST, habit, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 }

@@ -4,7 +4,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import{ListHabitsComponent} from './components/list-habits/list-habits.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-
 import { ReactiveFormsModule } from '@angular/forms';
 
 
