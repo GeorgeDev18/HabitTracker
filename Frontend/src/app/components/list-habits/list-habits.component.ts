@@ -32,6 +32,22 @@ export class ListHabitsComponent implements OnInit {
     );
   }
 
+  deleteHabit(habitId: number | undefined): void {
+    if (habitId === undefined) {
+      this.errorMessage = 'Habit ID is undefined';
+      return;
+    }
+
+    this.habitService.deleteHabit(habitId).subscribe(
+      (deletedHabit: Habit) => {
+        this.habits = this.habits.filter(habit => habit.id !== habitId);
+      },
+      (error) => {
+        this.errorMessage = error.message || 'An error occurred while deleting the habit';
+      }
+    );
+  }
+
  
 }
 
