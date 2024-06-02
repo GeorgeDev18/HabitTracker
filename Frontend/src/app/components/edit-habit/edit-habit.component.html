@@ -1,0 +1,54 @@
+<div class="col-lg-4 offset-lg-4">
+    <div class="card text-white bg-primary mb-3 mt-2" style="max-width: 25rem;">
+      <div class="card-header text-center">Edit habit</div>
+      <div class="card-body">
+        <form [formGroup]="habitForm" (ngSubmit)="onSaveChanges()">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" class="form-control" formControlName="name" placeholder="Input a name" required>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="description">Description:</label>
+            <input id="description" type="text" class="form-control" formControlName="description" placeholder="Input a description" required>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="type">Type:</label>
+            <select id="type" class="form-control" formControlName="type" required>
+              <option value="" disabled selected>Choose a type</option>
+              <option value="Health">Health</option>
+              <option value="Productivity">Productivity</option>
+              <option value="Homework">Homework</option>
+            </select>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="level_priority">Priority:</label>
+            <select id="level_priority" class="form-control" formControlName="level_priority" required>
+              <option value="" disabled selected>Assign a priority</option>
+              <option value="Hight">Hight</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+  
+          <div class="form-group mt-2">
+            <label for="nameDay">Day:</label>
+            <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Name's day" required>
+          </div>
+  
+          <div class="row mt-3 text-center">
+            <div class="col-lg-6">
+              <button type="submit" class="btn btn-info">Save changes</button>
+            </div>
+            <div class="col-lg-6">
+              <button type="button" class="btn btn-secondary" routerLink="/list-habits">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  

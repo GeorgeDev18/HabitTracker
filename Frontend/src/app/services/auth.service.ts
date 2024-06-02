@@ -20,7 +20,11 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('authToken');
+    if (typeof window !== 'undefined' && localStorage.getItem('token')) {
+      return localStorage.getItem('token');
+    } else {
+      return null; // O manejar el caso donde localStorage no está disponible
+    }
   }
 
   logout(): void {

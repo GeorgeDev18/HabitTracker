@@ -4,46 +4,46 @@
         <div class="card-body">
             <form (ngSubmit)="addHabit()" [formGroup]="habitForm">
                 <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input id="name" type="text" class="form-control" formControlName="name" placeholder="Ingrese nombre" required>
+                    <label for="name">Name:</label>
+                    <input id="name" type="text" class="form-control" formControlName="name" placeholder="Input a name" required>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="description">Descripción:</label>
-                    <input id="description" type="text" class="form-control" formControlName="description" placeholder="Ingrese descripción breve" required>
+                    <label for="description">Description:</label>
+                    <input id="description" type="text" class="form-control" formControlName="description" placeholder="Input a description" required>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="type">Tipo:</label>
+                    <label for="type">Type:</label>
                     <select id="type" class="form-control" formControlName="type" required>
-                        <option value="" disabled selected>Seleccione una categoría</option>
-                        <option value="Salud">Salud</option>
-                        <option value="Productividad">Productividad</option>
-                        <option value="Bienestar">Bienestar</option>
+                        <option value="" disabled selected>Choose a type</option>
+                        <option value="Health">Health</option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Homework">Homework</option>
                     </select>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="level_priority">Prioridad:</label>
+                    <label for="level_priority">Priority:</label>
                     <select id="level_priority" class="form-control" formControlName="level_priority" required>
-                        <option value="" disabled selected>Asigne una prioridad</option>
-                        <option value="Alta">Alta</option>
-                        <option value="Media">Media</option>
-                        <option value="Baja">Baja</option>
+                        <option value="" disabled selected>Assign a priority</option>
+                        <option value="Hight">Hight</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
                     </select>
                 </div>
 
                 <div class="form-group mt-2">
-                    <label for="nameDay">Días por semana:</label>
-                    <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Días por semana" required>
+                    <label for="nameDay">Day:</label>
+                    <input id="nameDay" type="text" class="form-control" formControlName="nameDay" placeholder="Name's day" required>
                 </div>
 
                 <div class="row mt-3 text-center">
                     <div class="col-lg-6">
-                        <button type="submit" class="btn btn-info" [disabled]="habitForm.invalid">Guardar</button>
+                        <button type="submit" class="btn btn-info" [disabled]="habitForm.invalid">Save</button>
                     </div>
                     <div class="col-lg-6">
-                        <button type="button" class="btn btn-secondary" routerLink="/list-habits">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" routerLink="/list-habits">Cancel</button>
                     </div>
                 </div>
             </form>

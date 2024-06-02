@@ -27,9 +27,7 @@ export class NewHabitComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    // Any initialization logic if needed
-  }
+  ngOnInit(): void {}
 
   addHabit(): void {
     if (this.habitForm.valid) {

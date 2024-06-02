@@ -52,6 +52,22 @@ public class HabitService {
         return habitRepository.findHabitByUserIdAndNameDay(userId, nameDay);
     }
 
+    public Habit getHabitByHabitId(Long habitId) {
+         // Obtenemos el ID del usuario autenticado
+        // Get authenticated  user's ID
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User userDetails = (User) authentication.getPrincipal();
+        Long userId = userDetails.getId();
+
+       // Busca el hábito del usuario por su ID
+        Habit habit = habitRepository.findByIdAndUserId(habitId,userId);
+        if (habit == null) {
+        throw new RuntimeException("Habit not found for user");
+        }
+
+        return habit;
+    }
+
     //POST
     public Long saveHabit(Habit habit) {
         
@@ -117,19 +133,15 @@ public class HabitService {
          //Actualizamos los datos del viejo hábito
          LOGGER.info("Acualizando hábito: {}", oldHabit);
 
-         oldHabit = Habit.builder()
-                .name(newHabit.getName())
-                .description(newHabit.getDescription())
-                .type(newHabit.getType())
-                .level_priority(newHabit.getLevel_priority())
-                .nameDay(newHabit.getNameDay())
-                .state(newHabit.isState())
-                .build();
+        oldHabit.setName(newHabit.getName());
+        oldHabit.setDescription(newHabit.getDescription());
+        oldHabit.setType(newHabit.getType());
+        oldHabit.setLevel_priority(newHabit.getLevel_priority());
+        oldHabit.setNameDay(newHabit.getNameDay());
 
-        //Finalmente guardamos el hábito en la DB
-         LOGGER.info("El hábito ha sido actualizado exitosamente");
-         return habitRepository.save(oldHabit);
+        LOGGER.info("Habit with id " + newHabit.getId() + " has been updated successfully");
 
+        return habitRepository.save(oldHabit);
     }
 
     //DELETE
@@ -149,6 +161,8 @@ public class HabitService {
         //Finalmente eliminamos el hábito de la DB
         habitRepository.delete(habit);
     }
+
+    
 
    
     

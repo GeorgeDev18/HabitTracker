@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule,  provideHttpClient, withFetch} from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { HabitService } from './services/habit.service';
+
 
 
 @NgModule({
@@ -14,7 +16,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [ provideHttpClient(withFetch())],
+  providers: [ provideHttpClient(withFetch()),HabitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

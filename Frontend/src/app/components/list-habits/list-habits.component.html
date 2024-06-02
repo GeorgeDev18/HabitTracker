@@ -23,7 +23,7 @@
         <td>{{ habit.level_priority}}</td>
         <td>{{ habit.nameDay}}</td>
         <td>
-          <button type="button" class="btn btn-info btn-sm" >Editar</button>
+          <button type="button" class="btn btn-info btn-sm" [routerLink]="['/edit', habit.id]" >Editar</button>
           <button type="button" class="btn btn-danger btn-sm ms-2" (click)="deleteHabit(habit.id)">Eliminar</button>
         </td>
       </tr>
@@ -32,6 +32,7 @@
       </div>
     </tbody>
   </table>
-
-  
 </div>
+
+
+

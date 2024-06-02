@@ -12,9 +12,10 @@ export class HabitService {
   
   private readonly BASE_URL = 'http://localhost:8080/api/v1';
   private readonly HABITS_URL_GET = `${this.BASE_URL}/list-habits`;
+  private readonly HABITS_URL_GET_ID = `${this.BASE_URL}/habit`;
   private readonly HABITS_URL_POST = `${this.BASE_URL}/new-habit`;
   private readonly HABITS_URL_DELETE = `${this.BASE_URL}/habit`;
-  
+  private readonly HABITS_URL_UPDATE = `${this.BASE_URL}/habit`;
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 
@@ -55,5 +56,21 @@ export class HabitService {
       catchError(this.handleError)
     );
   }
+
+  updateHabit(habit: Habit): Observable<Habit> {
+    const headers = this.getHeaders();
+    return this.http.put<Habit>(`${this.HABITS_URL_UPDATE}/${habit.id}`, habit, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
+  
+  getHabitById(habitId: number): Observable<Habit> {
+    const headers = this.getHeaders();
+    return this.http.get<Habit>(`${this.HABITS_URL_GET_ID}/${habitId}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }  
 
 }

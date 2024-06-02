@@ -3,16 +3,19 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HabitService } from '../../services/habit.service';
 import { Habit } from '../../interfaces/habit';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-list-habits',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,FormsModule],
   templateUrl: './list-habits.component.html',
   styleUrls: ['./list-habits.component.css']
 })
 export class ListHabitsComponent implements OnInit {
   habits: Habit[] = [];
+  habitToEdit: Habit | null = null;
   errorMessage: string = '';
 
   constructor(private habitService: HabitService) {}
@@ -48,6 +51,5 @@ export class ListHabitsComponent implements OnInit {
     );
   }
 
- 
 }
 

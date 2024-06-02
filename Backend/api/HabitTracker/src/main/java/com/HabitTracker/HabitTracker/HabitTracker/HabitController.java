@@ -3,7 +3,7 @@ package com.HabitTracker.HabitTracker.HabitTracker;
 import java.util.List;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,19 +30,24 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequiredArgsConstructor
 public class HabitController {
     
-    @Autowired
+    
     private final HabitService habitService;
     
-    @GetMapping("/list-habits")
+    @GetMapping("list-habits")
     public List<Habit> getHabitsByUserId() 
     {
          return habitService.getHabitsByUserId();
     }
 
-    @GetMapping("habit/{nameDay}")
+    @GetMapping("habit/day/{nameDay}")
     public List<Habit> getHabitByNameDay(@PathVariable String nameDay) 
     {
         return habitService.getHabitByNameDay(nameDay);
+    }
+
+    @GetMapping("habit/{habitId}")
+    public Habit getHabitByHabitId(@PathVariable Long habitId) {
+        return habitService.getHabitByHabitId(habitId);
     }
     
 
@@ -54,9 +59,10 @@ public class HabitController {
     }
 
     @PutMapping("habit/{habitId}")
-    public Habit updateHabit(@PathVariable Long habitId, @RequestBody Habit newHabit) 
+    public ResponseEntity<Habit> updateHabit(@PathVariable Long habitId, @RequestBody Habit newHabit) 
     {
-        return habitService.updateHabit(habitId,newHabit);
+        Habit updatedHabit = habitService.updateHabit(habitId, newHabit);
+        return ResponseEntity.ok(updatedHabit);
     }
 
     @DeleteMapping("habit/{habitId}")

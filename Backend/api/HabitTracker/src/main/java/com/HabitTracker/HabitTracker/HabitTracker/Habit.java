@@ -49,4 +49,7 @@ public class Habit {
             referencedColumnName = "id"
     )
     private User user;
+
+  
+
 }
